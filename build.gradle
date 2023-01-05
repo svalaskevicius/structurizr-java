@@ -4,11 +4,11 @@ subprojects { proj ->
 
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
-    apply plugin: 'signing'
+    // apply plugin: 'signing'
 
     description = 'Structurizr'
     group = 'com.structurizr'
-    version = '2.1.1'
+    version = '2.1.1-x1'
 
     repositories {
         mavenCentral()
@@ -30,10 +30,11 @@ subprojects { proj ->
     }
 
     jar {
+        archiveVersion = proj.version
         manifest {
             attributes(
                 "Implementation-Title": "Structurizr for Java",
-                "Implementation-Version": version
+                "Implementation-Version": archiveVersion
             )
         }
     }
@@ -84,8 +85,8 @@ subprojects { proj ->
         }
     }
 
-    signing {
-        sign publishing.publications.mavenJava
-    }
+    // signing {
+    //     sign publishing.publications.mavenJava
+    // }
 
 }

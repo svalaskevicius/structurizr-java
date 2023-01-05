@@ -300,6 +300,10 @@ public final class Model implements PropertyHolder {
         relationships.remove(relationship);
     }
 
+    public void removeRelationship(Relationship relationship) {
+        relationshipsById.remove(relationship.getId());
+    }
+
     /**
      * Gets the set of all elements in this model.
      *
@@ -914,9 +918,9 @@ public final class Model implements PropertyHolder {
 
             for (Relationship relationship : element.getRelationships()) {
                 if (relationship.getDestination().equals(sse)) {
-                    Relationship newRelationship = addRelationship(elementInstance, ssei, relationship.getDescription(), relationship.getTechnology(), relationship.getInteractionStyle());
+                    Relationship newRelationship = addRelationship(elementInstance, ssei, relationship.getDescription(), relationship.getTechnology(), relationship.getInteractionStyle(), relationship.getTagsAsSet().stream().toArray(String[] ::new));
                     if (newRelationship != null) {
-                        newRelationship.setTags(null);
+                        // newRelationship.setTags(null);
                         newRelationship.setLinkedRelationshipId(relationship.getId());
                     }
                 }
@@ -924,9 +928,9 @@ public final class Model implements PropertyHolder {
 
             for (Relationship relationship : sse.getRelationships()) {
                 if (relationship.getDestination().equals(element)) {
-                    Relationship newRelationship = addRelationship(ssei, elementInstance, relationship.getDescription(), relationship.getTechnology(), relationship.getInteractionStyle());
+                    Relationship newRelationship = addRelationship(ssei, elementInstance, relationship.getDescription(), relationship.getTechnology(), relationship.getInteractionStyle(), relationship.getTagsAsSet().stream().toArray(String[] ::new));
                     if (newRelationship != null) {
-                        newRelationship.setTags(null);
+                        // newRelationship.setTags(null);
                         newRelationship.setLinkedRelationshipId(relationship.getId());
                     }
                 }

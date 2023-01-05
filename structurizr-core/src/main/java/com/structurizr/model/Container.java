@@ -45,6 +45,7 @@ public final class Container extends StaticStructureElement implements Documenta
 
     void setParent(SoftwareSystem parent) {
         this.parent = parent;
+        this.onSetParent(parent);
     }
 
     /**

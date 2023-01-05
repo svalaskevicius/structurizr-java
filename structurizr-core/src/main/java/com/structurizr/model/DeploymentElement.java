@@ -29,6 +29,7 @@ public abstract class DeploymentElement extends GroupableElement {
 
     void setParent(DeploymentNode parent) {
         this.parent = parent;
+        this.onSetParent(parent);
     }
 
     public String getEnvironment() {
