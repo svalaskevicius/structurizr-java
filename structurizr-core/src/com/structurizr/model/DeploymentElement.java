@@ -29,6 +29,7 @@ public abstract class DeploymentElement extends Element {
 
     void setParent(DeploymentNode parent) {
         this.parent = parent;
+        this.onSetParent(parent);
     }
 
     public String getEnvironment() {

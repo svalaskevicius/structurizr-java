@@ -31,6 +31,7 @@ public final class Component extends StaticStructureElement {
 
     void setParent(Container parent) {
         this.parent = parent;
+        this.onSetParent(parent);
     }
 
     /**

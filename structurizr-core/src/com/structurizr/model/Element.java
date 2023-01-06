@@ -18,6 +18,9 @@ public abstract class Element extends ModelItem {
 
     private Set<Relationship> relationships = new LinkedHashSet<>();
 
+    private Set<Element> ancestors = new HashSet<>();
+    private Set<Element> descendants = new HashSet<>();
+
     protected Element() {
     }
 
@@ -42,7 +45,7 @@ public abstract class Element extends ModelItem {
     /**
      * Sets the name of this element.
      *
-     * @param name  the name, as a String
+     * @param name the name, as a String
      */
     void setName(String name) {
         if (name == null || name.trim().length() == 0) {
@@ -76,6 +79,27 @@ public abstract class Element extends ModelItem {
      * @return  the parent Element, or null if this element doesn't have a parent (i.e. a Person or SoftwareSystem)
      */
     public abstract Element getParent();
+
+    public Set<Element> getAncestors() {
+        return this.ancestors;
+    }
+
+    public Set<Element> getDescendants() {
+        return this.descendants;
+    }
+
+    protected void onSetParent(Element parent) {
+        Element p = parent;
+        while (p != null) {
+            this.ancestors.add(p);
+            p.descendants.add(this);
+            p.descendants.addAll(this.descendants);
+            for (Element d : this.descendants) {
+                d.ancestors.add(p);
+            }
+            p = p.getParent();
+        }
+    }
 
     /**
      * Gets the set of outgoing relationships.

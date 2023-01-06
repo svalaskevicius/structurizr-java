@@ -333,6 +333,10 @@ public final class Model {
         idGenerator.found(relationship.getId());
     }
 
+    public void removeRelationship(Relationship relationship) {
+        relationshipsById.remove(relationship.getId());
+    }
+
     /**
      * Gets the set of all elements in this model.
      *

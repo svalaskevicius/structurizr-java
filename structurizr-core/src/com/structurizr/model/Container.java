@@ -40,6 +40,7 @@ public final class Container extends StaticStructureElement {
 
     void setParent(SoftwareSystem parent) {
         this.parent = parent;
+        this.onSetParent(parent);
     }
 
     /**
